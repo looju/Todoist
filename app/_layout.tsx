@@ -7,5 +7,15 @@ export default function RootLayout() {
   if (!publishableKey) {
     throw new Error("Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY to your .env file");
   }
-  return <Stack />;
+
+  const InitialUserLayout = () => {
+    return <Stack />;
+  };
+  return (
+    <ClerkProvider publishableKey={publishableKey}>
+      <ClerkLoaded>
+        <InitialUserLayout />
+      </ClerkLoaded>
+    </ClerkProvider>
+  );
 }
