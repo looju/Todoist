@@ -1,8 +1,12 @@
-import { Text, View } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useCallback } from "react";
 import * as WebBrowser from "expo-web-browser";
+import * as Linking from "expo-linking";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 export default function Index() {
+  const { top } = useSafeAreaInsets();
   const { startOAuthFlow: googleOauth } = useOAuth({
     strategy: "oauth_google",
   });
@@ -33,15 +37,25 @@ export default function Index() {
   const openLink = async () => {
     await WebBrowser.openBrowserAsync("https://galaxies.dev");
   };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View className="gap-[40] mt-5" style={{ paddingTop: top }}>
+      <Image
+        source={require("@/assets/images/todoist-logo.png")}
+        resizeMode="contain"
+        className="self-center h-10"
+      />
+      <Image
+        source={require("@/assets/images/login.png")}
+        resizeMode="contain"
+        className="self-center h-64"
+      />
+      <View className="gap-5 mx-10">
+        <TouchableOpacity className="flex-row" onPress={handleAppleOAuth}>
+          <Ionicons name="logo-apple" size={10} />
+          <Text className="">Continue with Apple</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

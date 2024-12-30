@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
+import { ClerkProvider } from "@clerk/clerk-expo";
 import { tokenCache } from "@/Utils/Cache";
 import { useColorScheme } from "react-native";
 import { Colors } from "@/Constants/Colors";
@@ -29,9 +29,7 @@ export default function RootLayout() {
   };
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <ClerkLoaded>
-        <InitialUserLayout />
-      </ClerkLoaded>
+      <InitialUserLayout />
     </ClerkProvider>
   );
 }
