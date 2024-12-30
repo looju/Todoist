@@ -80,7 +80,11 @@ export default function TabLayout() {
         options={{
           title: "Browse",
           tabBarIcon: ({ color, focused }) => (
-            <AntDesign name="file1" color={color} size={focused ? 33 : 24} />
+            <AntDesign
+              name="folderopen"
+              color={color}
+              size={focused ? 33 : 24}
+            />
           ),
         }}
       />
