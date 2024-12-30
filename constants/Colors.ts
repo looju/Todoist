@@ -7,6 +7,8 @@ export const Colors = {
   dark: "#635E5E",
   lightText: "#a6a6a6",
   lightBorder: "#d9d9d9",
+  blue: "#0000ff",
+  white: "#fff",
 };
 
 export const DATE_COLORS = {
