@@ -51,9 +51,12 @@ export default function Index() {
         className="self-center h-64"
       />
       <View className="gap-5 mx-10">
-        <TouchableOpacity className="flex-row" onPress={handleAppleOAuth}>
+        <TouchableOpacity
+          className="flex-row items-center justify-center p-[10]"
+          onPress={handleAppleOAuth}
+        >
           <Ionicons name="logo-apple" size={10} />
-          <Text className="">Continue with Apple</Text>
+          <Text className="text-sm">Continue with Apple</Text>
         </TouchableOpacity>
       </View>
     </View>
