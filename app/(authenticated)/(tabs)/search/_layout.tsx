@@ -20,6 +20,10 @@ export default function Layout() {
           title: "Today",
           headerLargeTitle: true,
           headerRight: () => <MoreButton />,
+          headerSearchBarOptions: {
+            placeholder: "Search tasks, projects, more...",
+            tintColor: Colors.primary,
+          },
         }}
       />
     </Stack>

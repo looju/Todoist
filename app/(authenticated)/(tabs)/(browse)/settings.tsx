@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 import Fab from "@/Components/Fab";
 
-const Layout = () => {
+const Settings = () => {
   return (
     <>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -16,4 +16,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default Settings;
