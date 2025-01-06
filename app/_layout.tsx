@@ -5,6 +5,8 @@ import { ActivityIndicator, View, useColorScheme } from "react-native";
 import { Colors } from "@/Constants/Colors";
 import { useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
+import { Toaster } from "sonner-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
@@ -54,7 +56,10 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <PaperProvider>
-        <InitialUserLayout />
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Toaster />
+          <InitialUserLayout />
+        </GestureHandlerRootView>
       </PaperProvider>
     </ClerkProvider>
   );
