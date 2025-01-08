@@ -34,7 +34,9 @@ export default function RootLayout() {
 
     if (!isLoaded) {
       return (
-        <View className="flex justify-center items-center">
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
           <ActivityIndicator size={"small"} color={Colors.primary} />
         </View>
       );
@@ -44,8 +46,7 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           contentStyle: {
-            backgroundColor:
-              colorMode == "dark" ? Colors.black : Colors.background,
+            backgroundColor: Colors.background,
           },
         }}
       >

@@ -46,7 +46,7 @@ export default function TabLayout() {
         options={{
           title: "Today",
           tabBarIcon: ({ color, size, focused }) => (
-            <FontAwesome size={focused ? 33 : 24} name="home" color={color} />
+            <FontAwesome size={focused ? 26 : 24} name="home" color={color} />
           ),
           header: () => null,
           headerTransparent: true,
@@ -55,35 +55,26 @@ export default function TabLayout() {
       <Tabs.Screen
         name="upcoming"
         options={{
-          title: "Upcoming",
+          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <FontAwesome
               name="calendar"
               color={color}
-              size={focused ? 33 : 24}
+              size={focused ? 26 : 24}
             />
           ),
-          headerTitle: "Latest Crypto",
-          headerTransparent: true,
-          headerBackground: (props) => (
-            <BlurView
-              style={{ flex: 1 }}
-              intensity={100}
-              tint="systemUltraThinMaterialDark"
-            />
-          ),
-          headerTitleStyle: { color: Colors.white },
         }}
       />
       <Tabs.Screen
         name="(browse)"
         options={{
           title: "Browse",
+          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <AntDesign
               name="folderopen"
               color={color}
-              size={focused ? 33 : 24}
+              size={focused ? 26 : 24}
             />
           ),
         }}
@@ -93,7 +84,7 @@ export default function TabLayout() {
         options={{
           title: "Search",
           tabBarIcon: ({ color, focused }) => (
-            <AntDesign name="search1" color={color} size={focused ? 33 : 24} />
+            <AntDesign name="search1" color={color} size={focused ? 26 : 24} />
           ),
         }}
       />

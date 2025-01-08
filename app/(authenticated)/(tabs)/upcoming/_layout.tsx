@@ -10,16 +10,16 @@ export default function Layout() {
       screenOptions={{
         headerShadowVisible: false,
         contentStyle: {
-          backgroundColor: colorScheme == "dark" ? Colors.black : Colors.white,
+          backgroundColor: Colors.white,
         },
       }}
     >
       <Stack.Screen
         name="index"
         options={{
-          title: "Today",
+          title: "Upcoming",
           headerLargeTitle: true,
-          headerRight: () => <MoreButton />,
+          headerRight: () => <MoreButton pageName="upcoming" />,
         }}
       />
     </Stack>

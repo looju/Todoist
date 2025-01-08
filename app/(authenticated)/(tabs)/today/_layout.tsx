@@ -10,7 +10,7 @@ export default function Layout() {
       screenOptions={{
         headerShadowVisible: false,
         contentStyle: {
-          backgroundColor: colorScheme == "dark" ? Colors.black : Colors.white,
+          backgroundColor: Colors.white,
         },
       }}
     >
@@ -19,7 +19,7 @@ export default function Layout() {
         options={{
           title: "Today",
           headerLargeTitle: true,
-          headerRight: () => <MoreButton />,
+          headerRight: () => <MoreButton pageName="Today" />,
         }}
       />
     </Stack>

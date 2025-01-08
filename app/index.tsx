@@ -1,4 +1,11 @@
-import { Text, View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useCallback } from "react";
 import * as WebBrowser from "expo-web-browser";
@@ -6,7 +13,9 @@ import * as Linking from "expo-linking";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/Constants/Colors";
+import { useRouter } from "expo-router";
 export default function Index() {
+  const router = useRouter();
   const { top } = useSafeAreaInsets();
   const { startOAuthFlow: googleOauth } = useOAuth({
     strategy: "oauth_google",
@@ -15,9 +24,7 @@ export default function Index() {
 
   const handleAppleOAuth = useCallback(async () => {
     try {
-      const { createdSessionId, setActive } = await appleOauth({
-        redirectUrl: Linking.createURL("/dashboard", { scheme: "myapp" }),
-      });
+      const { createdSessionId, setActive } = await appleOauth();
       if (createdSessionId) {
         setActive!({ session: createdSessionId });
       }
@@ -26,9 +33,7 @@ export default function Index() {
 
   const handleGoogleOAuth = useCallback(async () => {
     try {
-      const { createdSessionId, setActive } = await googleOauth({
-        redirectUrl: Linking.createURL("/dashboard", { scheme: "myapp" }),
-      });
+      const { createdSessionId, setActive } = await googleOauth();
       if (createdSessionId) {
         setActive!({ session: createdSessionId });
       }
@@ -36,40 +41,38 @@ export default function Index() {
   }, []);
 
   const openLink = async () => {
-    await WebBrowser.openBrowserAsync("https://github.com/looju");
+    // await WebBrowser.openBrowserAsync("https://github.com/looju");
+    router.replace("/(authenticated)/(tabs)/today");
   };
 
   return (
-    <View className="gap-[40] mt-5" style={{ paddingTop: top }}>
+    <ScrollView style={[styles.container, { paddingTop: top }]}>
       <Image
         source={require("@/assets/images/todoist-logo.png")}
-        resizeMode="contain"
-        className="self-center h-10"
+        style={styles.loginImage}
       />
       <Image
         source={require("@/assets/images/login.png")}
-        resizeMode="contain"
-        className="self-center h-64"
+        style={styles.banner}
       />
-      <View className="gap-5 mx-10">
-        <TouchableOpacity
-          className="flex-row items-center justify-center p-[10] rounded-md border-2 border-neutral-50"
-          onPress={handleAppleOAuth}
-        >
-          <Ionicons name="logo-apple" size={10} />
-          <Text className="text-sm">Continue with Apple</Text>
+      <Text style={styles.title}>Organize your work and life, finally.</Text>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={[styles.btn]} onPress={handleAppleOAuth}>
+          <Ionicons name="logo-apple" size={24} />
+          <Text style={[styles.btnText]}>Continue with Apple</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          className="flex-row items-center justify-center p-[10] rounded-md border-2 border-neutral-50"
-          onPress={handleGoogleOAuth}
-        >
-          <Ionicons name="logo-google" size={10} />
-          <Text className="text-sm">Continue with Google</Text>
+
+        <TouchableOpacity style={[styles.btn]} onPress={handleGoogleOAuth}>
+          <Ionicons name="logo-google" size={24} />
+          <Text style={[styles.btnText]}>Continue with Google</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex-row items-center justify-center p-[10] rounded-md border-2 border-neutral-50">
-          <Ionicons name="mail" size={10} />
-          <Text className="text-sm">Continue with Email</Text>
+
+        <TouchableOpacity style={[styles.btn]} onPress={openLink}>
+          <Ionicons name="mail" size={24} />
+          <Text style={[styles.btnText]}>Continue with Email</Text>
         </TouchableOpacity>
+
         <Text style={styles.description}>
           By continuing you agree to Todoist's{" "}
           <Text style={styles.link} onPress={openLink}>
@@ -82,7 +85,7 @@ export default function Index() {
           .
         </Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -108,7 +111,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     gap: 20,
-    marginHorizontal: 40,
+    marginHorizontal: 20,
+    marginTop: 10,
   },
   btn: {
     flexDirection: "row",
@@ -127,10 +131,10 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 12,
     textAlign: "center",
-    color: Colors.black,
+    color: Colors.lightText,
   },
   link: {
-    color: Colors.blue,
+    color: Colors.lightText,
     fontSize: 12,
     textAlign: "center",
     textDecorationLine: "underline",
