@@ -58,8 +58,8 @@ export default function RootLayout() {
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <PaperProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <Toaster />
           <InitialUserLayout />
+          <Toaster />
         </GestureHandlerRootView>
       </PaperProvider>
     </ClerkProvider>

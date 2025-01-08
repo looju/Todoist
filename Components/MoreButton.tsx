@@ -4,6 +4,7 @@ import * as DropdownMenu from "zeego/dropdown-menu";
 import { styled } from "dripsy";
 import { Ionicons } from "@expo/vector-icons";
 import { toast } from "sonner-native";
+import { Colors } from "@/Constants/Colors";
 
 type MoreButtonProps = {
   pageName: string;
@@ -27,13 +28,22 @@ const MoreButton = ({ pageName }: MoreButtonProps) => {
   const copyToClipboard = async () => {
     const path = `myapp://(authenticated)/(tabs)/${pageName.toLowerCase()}`;
     // await Clipboard.setStringAsync(path) install expo clioboard first
-    toast("Copied to Clipboard");
+    toast.success("Copied to Clipboard", {
+      position: "top-center",
+      duration: 2000,
+      style: { backgroundColor: Colors.green },
+      actionButtonStyle: { backgroundColor: Colors.white },
+    });
   };
   return (
     <DropdownMenuRoot>
       <DropdownMenuTrigger>
         <TouchableOpacity>
-          <Text>{pageName}</Text>
+          <Ionicons
+            name="ellipsis-horizontal-outline"
+            size={30}
+            color={Colors.primary}
+          />
         </TouchableOpacity>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

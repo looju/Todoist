@@ -9,6 +9,7 @@ export const Colors = {
   lightBorder: "#d9d9d9",
   blue: "#0000ff",
   white: "#fff",
+  green: "#2f9d23",
 };
 
 export const DATE_COLORS = {
