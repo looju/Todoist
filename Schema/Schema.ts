@@ -1,40 +1,40 @@
-import { Realm } from "@realm/react";
-
-export class Task extends Realm.Object {
-  _id!: Realm.BSON.ObjectId;
-  description!: string;
-  name!: string;
-  priority!: number;
-  due_date!: string;
-  date_added!: string;
-  completed!: string;
-  date_completed!: string;
-  project_id!: string;
-
-  static generate(description: string) {
-    return {
-      _id: new Realm.BSON.ObjectId(),
-      description,
-      data_added: new Date(),
-    };
-  }
-
-  static schema = {
+export const Schema = {
+    version:0,
     name: "Task",
-    primaryKey: "_id",
+    primaryKey: "id",
+    type:"object",
+    title:"schema",
+    description:"Schema for the product, pending potential migration",
     properties: {
-      _id: "objectId",
-      description: "string",
-      name: "string",
-      priority: "int",
-      due_date: "string",
+      id: {
+        type:"string",
+        maxLength:100
+      },
+      description:{
+        type:"string"
+      } ,
+      name:{
+        type:"string"
+      } ,
+      priority: {
+        type: "string"
+      },
+      due_date: {
+        type:"string"
+      } ,
       date_added: {
         type: "string",
         default: new Date(),
       },
-      completed: "string",
-      date_completed: "string",
-      project_id: "string",
+      completed:{
+        type:"string"
+      },
+      date_completed:{
+        type:"string"
+      },
+      project_id:{
+        type:"string"
+      },
     },
   };
 }
