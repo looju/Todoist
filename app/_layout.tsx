@@ -3,19 +3,30 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { tokenCache } from "@/Utils/Cache";
 import { ActivityIndicator, View, useColorScheme } from "react-native";
 import { Colors } from "@/Constants/Colors";
-import { useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import { PaperProvider } from "react-native-paper";
 import { Toaster } from "sonner-native";
 import { RealmProvider } from "@realm/react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Task } from "@/Schema/Schema";
+import initializeDB from "@/Schema/InitializeDb";
+
+export const AppContext = createContext({});
 
 export default function RootLayout() {
+  const [db, setDb] = useState<any>(null);
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
   if (!publishableKey) {
     throw new Error("Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY to your .env file");
   }
+
+  useEffect(() => {
+    const initDB = async () => {
+      const db = await initializeDB();
+      setDb(db);
+    };
+    initDB().then();
+  }, [db]);
 
   const InitialUserLayout = () => {
     const colorMode = useColorScheme();
@@ -58,14 +69,14 @@ export default function RootLayout() {
   };
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <RealmProvider schema={[Task]}>
+      <AppContext.Provider value={{ db }}>
         <PaperProvider>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <InitialUserLayout />
             <Toaster />
           </GestureHandlerRootView>
         </PaperProvider>
-      </RealmProvider>
+      </AppContext.Provider>
     </ClerkProvider>
   );
 }
