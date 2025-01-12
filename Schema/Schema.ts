@@ -3,14 +3,19 @@ import { Realm } from "@realm/react";
 export class Task extends Realm.Object {
   _id!: Realm.BSON.ObjectId;
   description!: string;
-  isComplete!: boolean;
-  createdAt!: Date;
+  name!: string;
+  priority!: number;
+  due_date!: string;
+  date_added!: string;
+  completed!: string;
+  date_completed!: string;
+  project_id!: string;
 
   static generate(description: string) {
     return {
       _id: new Realm.BSON.ObjectId(),
       description,
-      createdAt: new Date(),
+      data_added: new Date(),
     };
   }
 
@@ -20,8 +25,13 @@ export class Task extends Realm.Object {
     properties: {
       _id: "objectId",
       description: "string",
-      isComplete: { type: "bool", default: false },
-      createdAt: "date",
+      name: "string",
+      priority: "int",
+      due_date: "string",
+      date_added: "string",
+      completed: "string",
+      date_completed: "string",
+      project_id: "string",
     },
   };
 }
