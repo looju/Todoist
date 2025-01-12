@@ -28,7 +28,10 @@ export class Task extends Realm.Object {
       name: "string",
       priority: "int",
       due_date: "string",
-      date_added: "string",
+      date_added: {
+        type: "string",
+        default: new Date(),
+      },
       completed: "string",
       date_completed: "string",
       project_id: "string",
