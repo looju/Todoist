@@ -2,9 +2,12 @@ import { addRxPlugin, createRxDatabase } from "rxdb";
 import { RxDBDevModePlugin } from "rxdb/plugins/dev-mode";
 import { RxDBQueryBuilderPlugin } from "rxdb/plugins/query-builder";
 import { RxDBUpdatePlugin } from "rxdb/plugins/update";
-import { RxDBMigrationPlugin } from "rxdb/dist/types/plugins/migration-schema";
+import { RxDBMigrationPlugin } from "rxdb/plugins/migration-schema";
 import { getRxStorageMemory } from "rxdb/plugins/storage-memory";
+import { disableWarnings } from "rxdb/plugins/dev-mode";
 import { Schema } from "./Schema";
+
+disableWarnings();
 
 addRxPlugin(RxDBMigrationPlugin);
 addRxPlugin(RxDBUpdatePlugin);

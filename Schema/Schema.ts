@@ -1,6 +1,5 @@
 export const Schema = {
   version: 0,
-  name: "Task",
   primaryKey: "id",
   type: "object",
   title: "schema",
@@ -24,7 +23,6 @@ export const Schema = {
     },
     date_added: {
       type: "string",
-      default: new Date(),
     },
     completed: {
       type: "string",
