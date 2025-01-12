@@ -6,7 +6,9 @@ import { Colors } from "@/Constants/Colors";
 import { useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
 import { Toaster } from "sonner-native";
+import { RealmProvider } from "@realm/react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Task } from "@/Schema/Schema";
 
 export default function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
@@ -56,12 +58,14 @@ export default function RootLayout() {
   };
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <PaperProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <InitialUserLayout />
-          <Toaster />
-        </GestureHandlerRootView>
-      </PaperProvider>
+      <RealmProvider schema={[Task]}>
+        <PaperProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <InitialUserLayout />
+            <Toaster />
+          </GestureHandlerRootView>
+        </PaperProvider>
+      </RealmProvider>
     </ClerkProvider>
   );
 }
